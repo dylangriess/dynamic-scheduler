@@ -5,7 +5,7 @@ $("#currentDay").text(currentDate);
 //format hour "H" to identify past, present, future hour block
 var hourBlock = $(".hour");
 // console.log(hourBlock);
-// TODO: format hours into 24-hour vs 12-hour block
+
 var timeNow = parseInt(moment().format("HH"));
 // console.log(timeNow);
 
@@ -29,6 +29,7 @@ var saveBtn = $(".saveBtn");
 
 function handleCalendar() {
   var hourData = [
+    localStorage.getItem("8amSave"),
     localStorage.getItem("9amSave"),
     localStorage.getItem("10amSave"),
     localStorage.getItem("11amSave"),
@@ -55,5 +56,6 @@ saveBtn.on("click", function (event) {
   console.log("Save button clicked!");
   var btnClick = event.target;
   var entryInput = btnClick.parentElement.previousElementSibling.children[0];
+  console.log(entryInput);
   return localStorage.setItem(btnClick.id, entryInput.value);
 });
