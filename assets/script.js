@@ -13,7 +13,7 @@ var timeNow = parseInt(moment().format("HH"));
 $.each(hourBlock, function (i, hour) {
   var hourId = parseInt($(this).attr("id"));
   //   console.log(i, hour);
-  console.log(hourId);
+  //   console.log(hourId);
   if (hourId === timeNow) {
     $(this).next().addClass("present");
   } else if (hourId < timeNow) {
@@ -40,14 +40,20 @@ function handleCalendar() {
     localStorage.getItem("5pmSave"),
   ];
   console.log(hourData);
+
+  for (var i = 0; i < hourData.length; i++) {
+    if (hourData[i] !== null) {
+      calEntry[i].value = hourData[i];
+    }
+  }
 }
 handleCalendar();
 
-//add event handler to save button
+//add event handler to save button, push data to localStorage
 saveBtn.on("click", function (event) {
   event.preventDefault();
-  var entry = calEntry.value;
-  if (entry !== null) {
-    localStorage.setItem(saveBtn.id, calEntry.value);
-  }
+  console.log("Save button clicked!");
+  var btnClick = event.target;
+  var entryInput = btnClick.parentElement.previousElementSibling.children[0];
+  return localStorage.setItem(btnClick.id, entryInput.value);
 });
